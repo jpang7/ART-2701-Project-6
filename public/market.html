@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Market</title>
+        <!-- <script type="module" src="test1.js"></script> -->
+    </head>
+    <body>
+        <div id="items"></div>
+        <!-- ................. Javascript imports .................. -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="../js/web3.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script> -->
+        <script src="../js/lightweight_ABI.js"></script>
+        <script>
+        //......................... Javascript ..................   
+            var light_contract;
+            var userAccount;
+
+
+            window.addEventListener('load', function() {
+
+                var web3 = window.web3;
+                if (typeof web3 !== 'undefined') {
+                    web3js = new Web3(web3.currentProvider);
+                } else {
+                    console.log('No web3? Consider trying MetaMask!');
+                    // web3js = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
+                    console.log(web3js.eth.accounts.wallet);
+                }
+
+                startApp()
+            })
+
+            async function startApp() {
+                userAccount = await web3js.eth.getAccounts()
+                userAccount1 = userAccount[0]
+                console.log("This is your address "+userAccount1);
+
+                light_contract = new web3js.eth.Contract(lightweight_ABI, '0x1a091f43f78abc06cbe399d2f6825c12522943ec');
+                // market_contract = new web3js.eth.Contract(market_ABI, "0x522206e2fd3f43d8029f8191c0a0197bdb72461a");
+                // earn_storage_contract = new web3js.eth.Contract(earn_storage_ABI, "0x151e631c9346963863d08a75abad7bb76e6fb34b");
+                //To initialize. Uncomment if redeployed
+                // await earn_storage_contract.methods.setContractX("0x6da052c07c2b301add4da1b81035aa45b878872f").send({from: userAccount1, gas:600000});
+                // await earn_storage_contract.methods.setContractY("0x522206e2fd3f43d8029f8191c0a0197bdb72461a").send({from: userAccount1, gas: 600000});
+                await getOffers().then(displayOffers);
+
+
+                // earn_contract.methods.createItem("wings", 100, 100).send({from: userAccount1});
+                // earn_storage_contract.methods.getItemsByOwner(userAccount).call().then(console.log);
+                // await light_contract.methods.offerItem(0, 89).send({from:userAccount1,gas:600000});
+
+                
+            }
+
+            class OfferDetail {}
+
+            async function getOfferDetails(id) {
+                detail = new OfferDetail(id)
+                await light_contract.methods.getName(id).call().then(function(value) {
+                    detail.name = value;
+                }, function(err) {
+                    console.error(err);
+                });
+                await light_contract.methods.getHashCode(id).call().then(function(value) {
+                    detail.mix = value;
+                }, function(err) {
+                    console.error(err);
+                });
+                return detail;
+            }
+
+            async function getOffers() {
+                itemsOffered = await light_contract.getPastEvents("OfferPosted", {fromBlock:0,toBlock:'17'});
+                // itemsOffered = await market_contract.getPastEvents("OfferPosted");
+                offerArray = [];
+                for (let i in itemsOffered) {
+                    values = await itemsOffered[i].returnValues;
+                    offerArray.push(values);
+                }
+                return offerArray;
+            }
+
+            //TODO: only get if still up
+            async function displayOffers(offers) {
+                $("#items").empty();
+                for (offer of offers) {
+                    details = await getOfferDetails(offer.itemId);
+                    $("#items").append(`<div class="item">
+                        <ul>
+                            <li>Name: ${details.name}</li>
+                            <li>HashCode: ${details.hashCode}</li>
+                            <li>Price: ${offer.salePriceInWei} wei</li>
+                            <li>Seller: ${offer.owner} </li>
+                        </ul>
+                    </div>`);
+                }
+            };
+        </script>
+    </body>
+</html>

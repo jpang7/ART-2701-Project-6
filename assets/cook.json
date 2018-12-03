@@ -1,0 +1,44 @@
+{"frames": {
+
+"COOKING. .png":
+{
+	"frame": {"x":0,"y":0,"w":90,"h":85},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":90,"h":85},
+	"sourceSize": {"w":90,"h":85}
+},
+"COOKING..  .png":
+{
+	"frame": {"x":90,"y":0,"w":102,"h":85},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":102,"h":85},
+	"sourceSize": {"w":102,"h":85}
+},
+"COOKING... . .png":
+{
+	"frame": {"x":192,"y":0,"w":114,"h":85},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":85},
+	"sourceSize": {"w":114,"h":85}
+},
+"COOKING.png":
+{
+	"frame": {"x":306,"y":0,"w":86,"h":85},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":86,"h":85},
+	"sourceSize": {"w":86,"h":85}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "cook.png",
+	"format": "RGBA8888",
+	"size": {"w":392,"h":85},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:efc60b0fb85b4c0ccd1e1741d7c9de5c:cef279261a34a4c1badd97e0506cc9c9:16febdd8a4e9076f628204706babf19e$"
+}
+}

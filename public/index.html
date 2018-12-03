@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Shake Well: An Ethereum Adventure</title>
+
+		<script type="text/javascript" src="../js/phaser.min.js"></script>
+		<script type="text/javascript" src="../js/Boot.js"></script>
+		<script type="text/javascript" src="../js/Preload.js"></script>
+        <script type="text/javascript" src="../js/MainGame.js"></script>
+        <script type="text/javascript" src="../js/FirstTime.js"></script>
+        <script type="text/javascript" src="../js/Output.js"></script>
+        <script type="text/javascript" src="../js/Output2.js"></script>
+        <script type="text/javascript" src="../js/web3.min.js"></script>
+        <script src="../js/lightweight_ABI.js"></script>
+        <script>
+            window.addEventListener('load', function() {
+
+            var web3 = window.web3;
+            if (typeof web3 !== 'undefined') {
+                web3js = new Web3(web3.currentProvider);
+            } else {
+                console.log('No web3? Consider trying MetaMask!');
+                // web3js = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
+                console.log(web3js.eth.accounts.wallet);
+            }
+
+            startApp();
+            });
+
+            var fox = 0;
+
+
+            async function startApp() {
+                userAccount = await web3js.eth.getAccounts()
+                userAccount1 = userAccount[0]
+                console.log("This is your address "+userAccount1);
+
+                light_contract = new web3js.eth.Contract(lightweight_ABI,'0x1a091f43f78abc06cbe399d2f6825c12522943ec');
+                //To initialize. Uncomment if redeployed
+                // await earn_storage_contract.methods.setContractX("0x6da052c07c2b301add4da1b81035aa45b878872f").send({from: userAccount1, gas:600000});
+                // await earn_storage_contract.methods.setContractY("0x522206e2fd3f43d8029f8191c0a0197bdb72461a").send({from: userAccount1, gas: 600000});
+
+
+                // earn_contract.methods.createItem("wings", 100, 100).send({from: userAccount1});
+                // earn_storage_contract.methods.getItemsByOwner(userAccount).call().then(console.log);
+                // await market_contract.methods.offerItem(0, 89).send({from:userAccount1,gas:600000});
+
+                try{
+                    var items = await light_contract.methods.getItemsByOwner(userAccount1).call();
+                    console.log(items);
+                    for (let i in items) {
+                        let code = await light_contract.methods.getHashCode(i).call();
+                        console.log("code is "+code);
+                        if (code[3] == '1') {
+                            if (code[0]=='0') {
+                                fox = 1;
+                                console.log("COLOR")
+                            }
+                            else if (code[0] == '1') {
+                                fox = 5;
+                                console.log("RAINBOW")
+                            }
+                            else if (code[0] == '5'){
+                                fox=0;
+                                console.log("NORMAL")
+                            }
+                        }
+
+                    }
+                    
+                } catch(err) {
+                    console.log('something went wrong in drinks');
+                    console.log(err);
+                }
+            }
+            
+        </script>
+        <script type="text/javascript" src="../js/main.js"></script>
+		<style>
+		  body {
+		    padding: 0px;
+		    margin: 0px;
+		  }
+        </style>
+	</head>
+
+	<body>  
+
+	</body>
+</html>
