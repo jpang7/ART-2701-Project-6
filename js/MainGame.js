@@ -6,15 +6,15 @@ class MainGame extends Phaser.State {
         this.load.image('table', 'ART-2701-Project-6-/assets/assets/final_table.png');
 
         //Idle animation
-        this.load.atlasJSONArray('metal','ART-2701-Project-6-/assets/assets/metal.png','ART-2701-Project-6-/assets/assets/metal.JSON');
-        this.load.atlasJSONArray('powder','ART-2701-Project-6-/assets/assets/powder.png','ART-2701-Project-6-/assets/assets/powder.JSON');
-        this.load.atlasJSONArray('oil','ART-2701-Project-6-/assets/assets/oil.png','ART-2701-Project-6-/assets/assets/oil.JSON');
-        this.load.atlasJSONArray('box','ART-2701-Project-6-/assets/assets/box.png','ART-2701-Project-6-/assets/assets/box.JSON');
+        this.load.atlasJSONArray('metal','ART-2701-Project-6-/assets/assets/metal.png','ART-2701-Project-6-/assets/assets/metal.json');
+        this.load.atlasJSONArray('powder','ART-2701-Project-6-/assets/assets/powder.png','ART-2701-Project-6-/assets/assets/powder.json');
+        this.load.atlasJSONArray('oil','ART-2701-Project-6-/assets/assets/oil.png','ART-2701-Project-6-/assets/assets/oil.json');
+        this.load.atlasJSONArray('box','ART-2701-Project-6-/assets/assets/box.png','ART-2701-Project-6-/assets/assets/box.json');
 
         //Dumping animation
-        this.load.atlasJSONArray('metalDump','ART-2701-Project-6-/assets/assets/metal_dump.png','ART-2701-Project-6-/assets/assets/metal_dump.JSON');
-        this.load.atlasJSONArray('oilDump','ART-2701-Project-6-/assets/assets/oil_dump.png','ART-2701-Project-6-/assets/assets/oil_dump.JSON');
-        this.load.atlasJSONArray('powderDump','ART-2701-Project-6-/assets/assets/powder_dump.png','ART-2701-Project-6-/assets/assets/powder_dump.JSON');
+        this.load.atlasJSONArray('metalDump','ART-2701-Project-6-/assets/assets/metal_dump.png','ART-2701-Project-6-/assets/assets/metal_dump.json');
+        this.load.atlasJSONArray('oilDump','ART-2701-Project-6-/assets/assets/oil_dump.png','ART-2701-Project-6-/assets/assets/oil_dump.json');
+        this.load.atlasJSONArray('powderDump','ART-2701-Project-6-/assets/assets/powder_dump.png','ART-2701-Project-6-/assets/assets/powder_dump.json');
 
         //Next button
         this.load.image('done', 'ART-2701-Project-6-/assets/assets/done.png');
