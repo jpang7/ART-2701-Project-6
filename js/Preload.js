@@ -1,7 +1,7 @@
 class Preload extends Phaser.State {
     preload() {
-        this.load.atlasJSONArray('foxWalk', 'ART-2701-Project-6-/assets/assets/foxSprite.png', 'ART-2701-Project-6-/assets/assets/foxSprite.json');
-        this.load.image('heard', 'ART-2701-Project-6-/assets/assets/shall we begin.png');
+        this.load.atlasJSONArray('foxWalk', 'ART-2701-Project-6-/assets/foxSprite.png', 'ART-2701-Project-6-/assets/foxSprite.json');
+        this.load.image('heard', 'ART-2701-Project-6-/assets/shall we begin.png');
     }
     create() {
         console.log('Preload')
