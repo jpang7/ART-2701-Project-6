@@ -8,6 +8,3 @@ But even without an account there are 9 different items you can try to make.
 
 
 After getting an account, you should visit the faucet (free testnet ether) here https://faucet.metamask.io/. 
-
-
-I will have an interface that lets you see your items up and even offer them for sale by Friday afternoon(?)
