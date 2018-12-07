@@ -3,21 +3,21 @@ class MainGame extends Phaser.State {
     preload() {
 
         //table
-        this.load.image('table', '../assets/final_table.png');
+        this.load.image('table', './assets/final_table.png');
 
         //Idle animation
-        this.load.atlasJSONArray('metal','../assets/metal.png','../assets/metal.JSON');
-        this.load.atlasJSONArray('powder','../assets/powder.png','../assets/powder.JSON');
-        this.load.atlasJSONArray('oil','../assets/oil.png','../assets/oil.JSON');
-        this.load.atlasJSONArray('box','../assets/box.png','../assets/box.JSON');
+        this.load.atlasJSONArray('metal','./assets/metal.png','./assets/metal.json');
+        this.load.atlasJSONArray('powder','./assets/powder.png','./assets/powder.json');
+        this.load.atlasJSONArray('oil','./assets/oil.png','./assets/oil.json');
+        this.load.atlasJSONArray('box','./assets/box.png','./assets/box.json');
 
         //Dumping animation
-        this.load.atlasJSONArray('metalDump','../assets/metal_dump.png','../assets/metal_dump.JSON');
-        this.load.atlasJSONArray('oilDump','../assets/oil_dump.png','../assets/oil_dump.JSON');
-        this.load.atlasJSONArray('powderDump','../assets/powder_dump.png','../assets/powder_dump.JSON');
+        this.load.atlasJSONArray('metalDump','./assets/metal_dump.png','./assets/metal_dump.json');
+        this.load.atlasJSONArray('oilDump','./assets/oil_dump.png','./assets/oil_dump.json');
+        this.load.atlasJSONArray('powderDump','./assets/powder_dump.png','./assets/powder_dump.json');
 
         //Next button
-        this.load.image('done', '../assets/done.png');
+        this.load.image('done', './assets/done.png');
     }
     create() {
 

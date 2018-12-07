@@ -1,8 +1,8 @@
 class FirstTime extends Phaser.State {
     preload() {
-        this.load.image('done', '../assets/done.png');
-        this.load.image('gifts', '../assets/gifts.png');
-        this.load.image('table2', '../assets/table2.png');
+        this.load.image('done', 'ART-2701-Project-6-/assets/done.png');
+        this.load.image('gifts', 'ART-2701-Project-6-/assets/gifts.png');
+        this.load.image('table2', 'ART-2701-Project-6-/assets/table2.png');
     }
     create() {
         let foxWalk = this.add.sprite(0,0, 'foxWalk');

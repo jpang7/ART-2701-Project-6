@@ -1,6 +1,6 @@
 class Output extends Phaser.State {
     preload() {
-        this.load.atlasJSONArray('cooking','../assets/cooking.png','../assets/cooking.json');
+        this.load.atlasJSONArray('cooking','./assets/cooking.png','./assets/cooking.json');
     }
     create() {
         this.stage.backgroundColor = '#fff';
