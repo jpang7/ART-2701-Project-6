@@ -3,7 +3,6 @@ class FirstTime extends Phaser.State {
         this.load.image('done', '../assets/done.png');
         this.load.image('gifts', '../assets/gifts.png');
         this.load.image('table2', '../assets/table2.png');
-        this.load.image('done', '../assets/done.png');
     }
     create() {
         let foxWalk = this.add.sprite(0,0, 'foxWalk');
@@ -12,26 +11,17 @@ class FirstTime extends Phaser.State {
 
         let variable = this;
         function addText() {
-            let heard = variable.add.sprite(500,200,'heard');
+            variable.heard = variable.add.sprite(500,200,'heard');
         }
 
         setTimeout(function() {addText()}, 1400);
-        function submitText() {
-            variable.userName = prompt("Please enter your name", "");
-        }
-        setTimeout(function() {submitText()},1600);
 
-        function addText2() {
-            let excellent = variable.add.sprite(500,200,'excellent');
-        }
-
-        setTimeout(function() {addText2()}, 2000);
-
-        function next() {
-            variable.state.start('MainGame');
-        }
-        setTimeout(function() {next()},2200);
+        this.spaceKey = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     }
     update() {
+
+        if (this.heard != undefined && this.heard.alive && this.spaceKey.isDown) {
+            this.state.start('MainGame');
+        }   
     }
 }
