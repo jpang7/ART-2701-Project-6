@@ -1,11 +1,11 @@
 class Output2 extends Phaser.State {
     preload() {
-        this.load.spritesheet('wonItems', 'ART-2701-Project-6-/assets/assets/won_items2.png',128,128,36);
-        this.load.atlasJSONArray('backGroup', 'ART-2701-Project-6-/assets/assets/background.png', 'ART-2701-Project-6-/assets/assets/background.json');
-        this.load.image('collect', 'ART-2701-Project-6-/assets/assets/collect.png');
-        this.load.image('again', 'ART-2701-Project-6-/assets/assets/goAgain.png');
-        this.load.image('collectY', 'ART-2701-Project-6-/assets/assets/collectYellow.png');
-        this.load.image('againY', 'ART-2701-Project-6-/assets/assets/goAgainYellow.png');
+        this.load.spritesheet('wonItems', 'ART-2701-Project-6-/assets/won_items2.png',128,128,36);
+        this.load.atlasJSONArray('backGroup', 'ART-2701-Project-6-/assets/background.png', 'ART-2701-Project-6-/assets/background.json');
+        this.load.image('collect', 'ART-2701-Project-6-/assets/collect.png');
+        this.load.image('again', 'ART-2701-Project-6-/assets/goAgain.png');
+        this.load.image('collectY', 'ART-2701-Project-6-/assets/collectYellow.png');
+        this.load.image('againY', 'ART-2701-Project-6-/assets/goAgainYellow.png');
     }
     create() {
 
