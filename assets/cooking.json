@@ -1,0 +1,52 @@
+{"frames": {
+
+"Layer 1.png":
+{
+	"frame": {"x":0,"y":0,"w":300,"h":300},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":300,"h":300},
+	"sourceSize": {"w":300,"h":300}
+},
+"Layer 3.png":
+{
+	"frame": {"x":300,"y":0,"w":300,"h":300},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":300,"h":300},
+	"sourceSize": {"w":300,"h":300}
+},
+"Layer 4.png":
+{
+	"frame": {"x":600,"y":0,"w":300,"h":300},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":300,"h":300},
+	"sourceSize": {"w":300,"h":300}
+},
+"Layer 5.png":
+{
+	"frame": {"x":900,"y":0,"w":300,"h":300},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":300,"h":300},
+	"sourceSize": {"w":300,"h":300}
+},
+"Layer 6.png":
+{
+	"frame": {"x":1200,"y":0,"w":300,"h":300},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":300,"h":300},
+	"sourceSize": {"w":300,"h":300}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "cooking.png",
+	"format": "RGBA8888",
+	"size": {"w":1500,"h":300},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:3fc36781edbe5eb5a6211043b3ff54e3:20c79b9b2dac176f5b51d8398e70d59a:a08910dbc60befe6e895838376b2f4b6$"
+}
+}

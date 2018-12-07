@@ -1,91 +1,88 @@
 class Output2 extends Phaser.State {
     preload() {
-        this.load.spritesheet('concoctions','../assets/concoctions.png',64,64,36);
-        this.load.image('Collect?','../assets/congrats.png');
+        this.load.spritesheet('wonItems', '../assets/won_items2.png',128,128,36);
+        this.load.atlasJSONArray('backGroup', '../assets/background.png', '../assets/background.JSON');
+        this.load.image('collect', '../assets/collect.png');
+        this.load.image('again', '../assets/goAgain.png');
+        this.load.image('collectY', '../assets/collectYellow.png');
+        this.load.image('againY', '../assets/goAgainYellow.png');
     }
     create() {
-        var hashCode = this.game.state.states['MainGame'].hashCode
-        var conc = new Concoction(hashCode);
-        console.log(conc.name);
-        console.log(conc.index);
 
-        var concoction = this.add.sprite(400,200,'concoctions');
-        var choose = concoction.animations.add('choose',[conc.index]);
-        concoction.animations.play('choose',1,true);
+        var back = this.add.sprite(0,0,'backGroup');
+        var run = back.animations.add('run',[0,1,2,3]);
+        back.animations.play('run',7,true);
 
-        var text = this.add.text(400,250,conc.name, {
+        var derived = new Derivation(threeBitCode);
+        console.log(derived);
+
+        this.wonItem = this.add.sprite(400,200,'wonItems');
+        var choose = this.wonItem.animations.add('choose',[derived.index]);
+        this.wonItem.animations.play('choose',1,true);
+        this.physics.arcade.enable(this.wonItem);
+        this.wonItem.body.collideWorldBounds = true;
+        this.wonItem.body.velocity.x = 100;
+
+        this.collect = this.add.sprite(200,500,'collect');
+        this.collect.inputEnabled = true;
+
+        this.again = this.add.sprite(450,495,'again');
+        this.again.inputEnabled = true;
+
+        this.collectY = this.add.sprite(200,500,'collectY');
+        this.collectY.inputEnabled = true;
+        this.collectY.visible = false;
+
+        this.againY = this.add.sprite(450,495,'againY');
+        this.againY.inputEnabled = true;
+        this.againY.visible = false;
+        
+        var text = this.add.text(200,450,"YOU MADE "+derived.name, {
             font: 'bold 20pt Consolas',
             fill: 'black'
         });
 
-        var button = this.add.button(200,300,'Collect?',collectItem,this);
+        this.ytext = this.add.text(200,450,"YOU MADE "+derived.name, {
+            font: 'bold 20pt Consolas',
+            fill: 'yellow'
+        });
+
+        this.ytext.visible = false;
 
         function collectItem() {
             console.log("hooray");
             try{
                 console.log(userAccount1)
-                light_contract.methods.createItem(conc.name,hashCode,userAccount1).send({from: userAccount1});
+                light_contract.methods.createItem(derived.name,threeBitCode,userAccount1).send({from: userAccount1});
             } catch(err) {
                 console.log("Something went wrong");
                 console.log(err);
             }
         }
 
-        function Concoction(hash) {
-            this.id = hash;
-            this.name;
-            this.index =0;
-            if (hash[0] == '0') {
-                this.name = 'Red ';
-            }
-            else if (hash[0] == '1') {
-                this.name = 'Green ';
-                this.index += 4;
-            }
-            else if (hash[0] == '5') {
-                this.name = 'Rainbow '
-                this.index += 8;
-            }
-            if (hash[1] == '0') {
-                this.name += 'FRESH '
-            }
-            else if (hash[1] == '1') {
-                this.name += 'ROTTEN ';
-                this.index +=12;
-            }
-            else if (hash[1] == '5') {
-                this.name += 'FIRE '
-                this.index +=24;
-            }
-            if (hash[2] == '0') {
-                this.name += 'Awesome '
-            }
-            else if (hash[2] == '1') {
-                this.name += 'Boring ';
-            }
-            else if (hash[2] == '5') {
-                this.name += 'FIRE '
-            }
-            if (hash[4] == '0') {
-                if (hash[3] == '0') {
-                    this.name += 'Hammer';
-                }
-                else if (hash[3] == '1') {
-                    this.name += 'Cocktail';
-                    this.index += 1;
-                }
-                else if (hash[3] == '5') {
-                    this.name += 'Contract';
-                    this.index +=2;
-                }
-            }
-            else {
-                this.name += 'Robot';
-                this.index +=3;
-            }
-        }
+        this.collect.events.onInputDown.add(function() {
+            this.collectY.visible = true;
+            collectItem();
+        },this);
+        this.collect.events.onInputUp.add(function() {
+            this.collectY.visible = false;
+        },this);
+        this.again.events.onInputDown.add(function() {
+            this.againY.visible = true;
+            this.stage.backgroundColor = 'black';
+            this.state.start('Boot');
+        },this);
+        this.again.events.onInputUp.add(function() {
+            this.againY.visible = false;
+        },this);
     }
     update() {
+        var round = Math.round;
+        if (round(this.wonItem.x) % 2 == 0) this.ytext.visible = true;
+        else this.ytext.visible = false;
+        if (this.wonItem.x >= 500) this.wonItem.body.velocity.x = -100;
+        if (this.wonItem.x <= 200) this.wonItem.body.velocity.x = 100;
+
 
     }
 }

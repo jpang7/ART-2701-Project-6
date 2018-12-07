@@ -1,174 +1,204 @@
 class MainGame extends Phaser.State {
 
     preload() {
-        this.load.image('redPowder', '../assets/redPowder.png');
-        this.load.image('whiteOil', '../assets/whiteOil.png');
-        this.load.image('blueMetal', '../assets/blueMetal.png');
-        this.load.image('can','../assets/combine jug.png');
-        this.load.image('greenPowder','../assets/greenPowder.png');
-        this.load.image('yellowOil','../assets/yellowOil.png');
-        this.load.image('orangeMetal','../assets/orangeMetal.png');
-        this.load.image('rainbowOil','../assets/rainbowOil.png');
-        this.load.image('rainbowMetal','../assets/rainbowMetal.png');
-        this.load.image('rainbowPowder','../assets/rainbowPowder.png');
 
+        //table
+        this.load.image('table', '../assets/final_table.png');
+
+        //Idle animation
+        this.load.atlasJSONArray('metal','../assets/metal.png','../assets/metal.JSON');
+        this.load.atlasJSONArray('powder','../assets/powder.png','../assets/powder.JSON');
+        this.load.atlasJSONArray('oil','../assets/oil.png','../assets/oil.JSON');
+        this.load.atlasJSONArray('box','../assets/box.png','../assets/box.JSON');
+
+        //Dumping animation
+        this.load.atlasJSONArray('metalDump','../assets/metal_dump.png','../assets/metal_dump.JSON');
+        this.load.atlasJSONArray('oilDump','../assets/oil_dump.png','../assets/oil_dump.JSON');
+        this.load.atlasJSONArray('powderDump','../assets/powder_dump.png','../assets/powder_dump.JSON');
+
+        //Next button
+        this.load.image('done', '../assets/done.png');
     }
     create() {
 
-        var powderString;
-        var oilString;
-        var metalString;
+        this.startTime = this.time.now;
 
-        if (fox == 0) {
-            powderString = 'redPowder';
-            oilString = 'whiteOil';
-            metalString = 'blueMetal';
-        }
-        
-        else if (fox == 1) {
-            powderString = 'greenPowder';
-            oilString = 'yellowOil';
-            metalString = 'orangeMetal';
-        }
+        this.table = this.add.sprite(200,300,'table');
+        this.box = this.add.sprite(250,290,'box');
 
-        else if(fox ==5) {
-            powderString = 'rainbowPowder';
-            oilString = 'rainbowPowder';
-            metalString = 'rainbowMetal';
-        }
+        this.metal = this.add.sprite(320,240,'metal');
+        this.powder = this.add.sprite(420,310,'powder');
+        this.oil = this.add.sprite(540,330,'oil');
 
-        let table = this.add.sprite(0,0,'table2');
+        this.box2 = this.add.sprite(250,290,'box');
+        this.metal2 = this.add.sprite(270,250, 'metal');
+        this.powder2 = this.add.sprite(270,250, 'powder');
+        this.oil2 = this.add.sprite(270,290, 'oil');
 
+        this.metal2.visible =false;
+        this.powder2.visible = false;
+        this.oil2.visible = false;
+        this.box2.visible = false;
 
-        this.can = this.add.sprite(100,450,'can');
-        this.powder = this.add.sprite(300,450,powderString);
-        this.oil = this.add.sprite(400,450,oilString);
-        this.metal = this.add.sprite(500,400,metalString);
-
-        this.can.inputEnabled = true;
-        this.powder.inputEnabled = true;
-        this.oil.inputEnabled = true;
-        this.metal.inputEnabled = true;
-        
-        this.can.input.enableDrag();
-        this.powder.input.enableDrag();
-        this.oil.input.enableDrag();
-        this.metal.input.enableDrag();
-
-        let gifts = this.add.sprite(200,200,'gifts');
-        function hide() {
-            gifts.visible = false;
-        }
-        setTimeout(function() {hide()}, 2000);
-        this.done = this.add.sprite(640,70,'done');
-        this.done.inputEnabled = true;
-        this.done.events.onInputDown.add(next,this);
-        this.canProceed = false;
+        this.done = this.add.sprite(400,300,'done');
+        this.done.visible = false;
 
         function next() {
-            if (!this.canProceed) {
-                alert("You're not done yet!!!");
-            }
-            else {
-                var user = this.game.state.states['FirstTime'].userName
-                console.log(this.duration + " is duration")
-                if (fox == 0) {
-                    this.hashCode = secretSauce("red","white","blue",this.duration,user);
-                }
-                else if (fox==1) {
-                    this.hashCode = secretSauce("green","yellow","orange",this.duration,user);
-                }
-                else if (fox==5) {
-                    this.hashCode = secretSauce("rainbow","rainbow","rainbow",this.duration,user);
-                }
-                console.log(this.hashCode);
-                this.state.start('Output');
-            }
-            
+            threeBitCode = createCode(resources, this.powderNumber, this.smokeNumber, isSpecial);
+            console.log(this.code);
+            clearInterval(trackSeconds);
+            clearInterval(trackSnaps);
+            this.state.start('Output');
         }
 
-        function secretSauce(powder, oil, metal, shakes, title) {
-            var first,second,third,fourth,fifth;
-            if (powder == 'red') {
-                first = 0;
-            }
-            else if (powder == 'green') {
-                first = 1;
-            }
-            else if (powder == 'rainbow') {
-                first = 5;
-            }
-            if (oil == 'white') {
-                second = 0;
-            }
-            else if (oil == 'yellow') {
-                second = 1;
-            }
-            else if (oil == 'rainbow') {
-                second = 5;
-            }
-            if (metal == 'blue') {
-                third = 0;
-            }
-            else if (metal == 'orange') {
-                third = 1;
-            }
-            else if (metal == 'rainbow') {
-                third = 5;
-            }
-            if (shakes % 2 == 0) {
-                fourth = 0;
-            }
-            else {
-                fourth = 1;
-            }
-            if (shakes == 10) {
-                fourth = 5;
-            }
-            if (countVowels(title) >=5) {
-                var prob = Math.random();
-                if (prob >= .7) {
-                    fifth = 0;
-                }
-                else {
-                    fifth = 1;
-                }
-            }
-            else {fifth = 0};
-            return first.toString() + second.toString() + third.toString() + fourth.toString() + fifth.toString();
-        }
+        this.done.events.onInputDown.add(next,this);
 
-        function isVowel(ch) {
-            ch = ch.toUpperCase();
-            return (ch=='A' || ch=='E' || ch=='I' || 
-                                   ch=='O' || ch=='U'); 
-        }
+        this.box.animations.add('idle',[0,1,2,3,4,5,6]);
+        this.box.animations.add('active',[7]);
+        this.box2.animations.add('active',[7]);
         
-        function countVowels(str) {
-            var count = 0; 
-            for (let i = 0; i < str.length; i++) 
-                if (isVowel(str.charAt(i))) // Check for vowel 
-                    ++count; 
-            return count;  
+        if (resources == 0) {
+            this.metal.animations.add('idle',[24,25,26,27,28]);
+            this.metal2.animations.add('active',[0,1,2,3,4,5,6,7]);
+
+            this.powder.animations.add('idle',[0,1,2,3]);
+            this.powder2.animations.add('active',[12,13,14,15,16,17]);
+
+            this.oil2.animations.add('idle',[0,1,2,3,4,5,6]);
+            this.oil2.animations.add('active',[14,15,16,17,18,19,20]);
         }
-        this.duration = 0;
+        else if (resources == 1) {
+            this.metal.animations.add('idle',[30,31,32,33,34]);
+            this.metal2.animations.add('active',[8,9,10,11,12,13,14,15]);
+
+            this.powder.animations.add('idle',[4,5,6,7]);
+            this.powder2.animations.add('active',[18,19,20,21,22,23]);
+
+            this.oil2.animations.add('idle',[5,6,7,8,9,10,11]);
+            this.oil2.animations.add('active',[21,22,23,24,25,26,27]);
+        }
+        else if (resources == 2) {
+            this.metal.animations.add('idle',[36,37,38,39,40]);
+            this.metal2.animations.add('active',[16,17,18,19,20,21,22,23]);
+
+            this.powder.animations.add('idle',[8,9,10,11]);
+            this.powder2.animations.add('active',[24,25,26,27,28,29]);
+
+            this.oil2.animations.add('idle',[10,11,12,13,14,15]);
+            this.oil2.animations.add('active',[28,29,30,31,32,33,34]);
+        }
+
+        this.metal.animations.play('idle',7,true);
+        this.oil.animations.play('active',7,true);
+        this.box.animations.play('idle',7,true);
+        this.box2.animations.play('active',1,true);
+
+        this.metal.inputEnabled = 
+        this.powder.inputEnabled = 
+        this.oil.inputEnabled = true;
+
+        this.metal.input.enableDrag();
+        this.powder.input.enableDrag();
+        this.oil.input.enableDrag();
+
+        this.numberSnaps = 0;
+        this.smokeSeconds = 0;
+        
+        this.shouldOpen = false;
+
+        //variables to pass into the item making formula
+        this.powderNumber;
+        this.smokeNumber;
+
+        var variable = this;
+    
+        var trackSnaps = setInterval(function(){
+            variable.numberSnaps++; 
+            variable.powder.animations.play('idle',7, false);
+            console.log(variable.numberSnaps);
+        }, 2000);
+
+        var trackSeconds = setInterval(function(){
+            variable.smokeSeconds++;
+        }, 1000);
     }
     update() {
-        if (this.powder.overlap(this.can) && !this.input.activePointer.leftButton.isDown) {
-            this.powder.kill();
+
+        if (this.metal.x == -100 && this.powder.x == -100 && this.oil.x == -100) {
+            this.done.visible = true;
+            this.done.inputEnabled = true;
         }
-        if (this.oil.overlap(this.can)&& !this.input.activePointer.leftButton.isDown) {
-            this.oil.kill();
+
+        if (this.shouldOpen) this.box.animations.play('active',1,true);
+        else this.box.animations.play('idle',7,true);
+
+        function openBox() {
+            this.shouldOpen = true;
         }
-        if (this.metal.overlap(this.can)&& !this.input.activePointer.leftButton.isDown) {
-           this.metal.kill();
+
+        function closeBox() {
+            this.shouldOpen = false;
         }
-        if (!this.powder.alive && !this.oil.alive && !this.metal.alive) {
-            this.canProceed = true;
+
+        this.metal.events.onInputDown.add(openBox, this);
+        this.metal.events.onInputUp.add(closeBox, this);
+        this.powder.events.onInputDown.add(openBox, this);
+        this.powder.events.onInputUp.add(closeBox, this);
+        this.oil.events.onInputDown.add(openBox, this);
+        this.oil.events.onInputUp.add(closeBox, this);
+
+        var variable = this;
+
+        if (this.powder.overlap(this.box) && !this.input.activePointer.leftButton.isDown) {
+            this.powder.x = -100;
+            this.box2.visible = true;
+            this.box.visible = false;
+            this.powder2.visible = true;
+            this.powder2.animations.play('active',10,false);
+            setTimeout(function() {killPowder2()},1000);
+            this.powderNumber = this.numberSnaps;
+            console.log(this.powderNumber)
         }
-        
-        if (this.canProceed) {
-            this.duration++;
+
+        if (this.metal.overlap(this.box) && !this.input.activePointer.leftButton.isDown) {
+            this.metal.x = -100;
+            this.box2.visible = true;
+            this.box.visible = false;
+            this.metal2.visible = true;
+            this.metal2.animations.play('active',10,false);
+            setTimeout(function() {killMetal2()},1000);
+            this.smokeNumber = this.smokeSeconds;
+            console.log(this.smokeNumber);
         }
+
+        if (this.oil.overlap(this.box) && !this.input.activePointer.leftButton.isDown) {
+            this.oil.x = -100;
+            this.box2.visible = true;
+            this.box.visible = false;
+            this.oil2.visible = true;
+            this.oil2.animations.play('idle',10,false);
+            setTimeout(function() {killOil2()},1000);
+        }
+
+        function killPowder2() {
+            if (variable.powder2 != undefined) variable.powder2.kill();
+            variable.box2.visible = false;
+            variable.box.visible = true;
+        }
+
+        function killOil2() {
+            if (variable.oil2 != undefined) variable.oil2.kill();
+            variable.box2.visible = false;
+            variable.box.visible = true;
+        }
+
+        function killMetal2() {
+            if (variable.metal2 != undefined) variable.metal2.kill();
+            variable.box2.visible = false;
+            variable.box.visible = true;
+        }
+
     }
+
+
 }

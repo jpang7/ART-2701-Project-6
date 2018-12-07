@@ -5,12 +5,83 @@ var numShakes;
 var name;
 
 function main() {
-    var hashhh = secretSauce('red','white','blue',10,'Jonathanaaaa');
-    var conc = new Concoction(hashhh);
-    console.log(conc.name);
-    console.log(drinksShown(['00100']));
-    console.log(drinksShown(['01000']));
+    console.log(new Derivation(createCode(1,1,1,false)))
+    // var hash = createCode(0,1,1,false);
+    // var der = new Der
+    // var hashhh = secretSauce('red','white','blue',10,'Jonathanaaaa');
+    // var conc = new Concoction(hashhh);
+    // console.log(conc.name);
+    // console.log(drinksShown(['00100']));
+    // console.log(drinksShown(['01000']));
 }
+
+main();
+
+function Derivation(hash) {
+    this.id = hash;
+    this.name;
+    if (hash[2] == '0') {
+        this.name = 'Normal ';
+    }
+    else if (hash[2] == '1') {
+        this.name = 'Rotten ';
+    }
+    else if (hash[2] == '2') {
+        this.name = 'RARE ';
+    }
+
+
+    if (hash[0] == '0') {
+        this.name+= 'Red ';
+    }
+    else if (hash[0] == '1') {
+        this.name+= 'Green ';
+    }
+    else if (hash[0] == '2') {
+        this.name+= 'Rainbow ';
+    }
+
+    if (hash[1] == '0') {
+        this.name+= 'Clothes'
+    }
+    else if (hash[1] == '1') {
+        this.name+= 'Drink'
+    }
+    else if (hash[1] == '2') {
+        this.name+= 'Hardware'
+    }
+    else if (hash[1] == '3') {
+        this.name+= 'Special Item!'
+    }
+}
+
+//Note: if no drinks then drinkVar = 0
+function createCode(drinkVar, numCracks, numSmoke, isSpecial) {
+    var hashCode = '';
+    
+    hashCode += drinkVar;
+
+    if (numCracks == 0) {
+        hashCode += 1;
+    } 
+    else if (numCracks == 1) {
+        if (isSpecial) {
+            hashCode += 3;
+        } else hashCode += 0;
+    }
+    else {
+        hashCode += 2;
+    }
+
+    if (numSmoke <= 5) {
+        hashCode += 2;
+    } else if (numSmoke <= 10) {
+        hashCode += 0;
+    } else hashCode += 1;
+
+    return hashCode;
+}
+
 
 function Concoction(hash) {
     this.id = hash;
