@@ -6,7 +6,11 @@ This is a small game about mixing resources at the right time in order to create
 
 Check out what you can win:
 
-![alt text](/public/assets/won_items.png)
+<p align="center">
+  <src="/public/assets/won_items.png">
+</p>
+
+
 
 Your chances of making new items actually depend on which items you already own! But even without an account there are 9 different items you can try to make. (The top 9 in red)
 
