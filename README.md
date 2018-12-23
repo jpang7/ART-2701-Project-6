@@ -7,12 +7,11 @@ This is a small game about mixing resources at the right time in order to create
 Check out what you can win:
 
 <p align="center">
-  <src="/public/assets/won_items.png">
+  <img src="https://github.com/jpang7/ART-2701-Project-6-/blob/master/public/assets/won_items.png?raw=true" alt="Items you can win"/>
 </p>
 
 
-
-Your chances of making new items actually depend on which items you already own! But even without an account there are 9 different items you can try to make. (The top 9 in red)
+*Your chances of making new items actually depend on which items you already own!* But even without an account there are 9 different items you can try to make. (The top 12 in red)
 
 
 After getting an account, you should visit the faucet (free testnet ether) here https://faucet.metamask.io/. 
