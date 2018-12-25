@@ -11,7 +11,7 @@ Check out what you can win:
 </p>
 
 
-*Your chances of making new items actually depend on which items you already own!* But even without an account there are 9 different items you can try to make. (The top 12 in red)
+*Your chances of making new items actually depend on which items you already own!* But even without an account there are 12 different items you can try to make. (The top 12 in red)
 
 
 After getting an account, you should visit the faucet (free testnet ether) here https://faucet.metamask.io/. 
